@@ -32,7 +32,7 @@ x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.
 input_shape = x_train.shape[1:]
 
 model = tf.keras.Sequential()
-model.add(tf.keras.layers.LSTM(units=512, input_shape=input_shape, return_sequences=True))
+model.add(tf.keras.layers.LSTM(units=130, input_shape=input_shape, return_sequences=True))
 model.add(tf.keras.layers.LSTM(units=300))
 model.add(tf.keras.layers.Dropout(0.15))
 model.add(tf.keras.layers.Dense(units=300, activation='relu'))
@@ -44,9 +44,9 @@ model.compile(optimizer=optimizer,
 print(model.summary())
 
 model.fit(x_train, y_train, validation_data=(x_val, y_val), batch_size=32, epochs=70, verbose=2)
-model.save("GTZAN_LSTM_prepared_features_01.h5")
+model.save("GTZAN_LSTM_prepared_features.h5")
 
 y_pred = model.predict(x_test)
 y_pred = np.argmax(y_pred, axis=1)
 
-print(np.sum(y_pred==y_test)/len(y_pred))
+print(f'Accuracy for pre extracted features model = {np.sum(y_pred==y_test)/len(y_pred)}')

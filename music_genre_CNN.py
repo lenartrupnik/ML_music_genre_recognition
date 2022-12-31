@@ -1,5 +1,5 @@
 from sklearn import metrics
-from helper_function import *
+from utils.helper_functions import *
 import tensorflow as tf
 from keras import models, layers
 from sklearn.model_selection import train_test_split
@@ -23,14 +23,13 @@ def create_CNN_model():
     y_test[y_test==10] = 9
 
     input_shape = x_train.shape[1:]
-    print(input_shape)
 
     cnn_model = models.Sequential([
         layers.Conv2D(64, (3,3), activation='relu', padding='same', input_shape=input_shape),
         layers.MaxPooling2D(2, padding='same'),
         
         layers.Conv2D(256, (3,3), activation='relu', padding='same', input_shape=input_shape),
-        layers.MaxPooling2D(2, padding='same'),
+        layers.MaxPooling2D(2, pvfgadding='same'),
         layers.Dropout(0.3),
         
         layers.Conv2D(256, (3,3), activation='relu', padding='same', input_shape=input_shape),
@@ -51,19 +50,15 @@ def create_CNN_model():
                             verbose=2,
                             batch_size=32)
 
-    cnn_model.save("GTZAN_CNN_02.h5")
+    cnn_model.save("GTZAN_CNN.h5")
     y_pred = cnn_model.predict(x_test)
     y_pred = np.argmax(y_pred, axis=1)
     y_test = np.argmax(y_test, axis=1)
     #pd.DataFrame.from_dict(history.history).to_csv('history_CNN', index=False)
     plot_history(history)
     
-    confusion_matrix = metrics.confusion_matrix(y_test, y_pred)
-    cm_display = metrics.ConfusionMatrixDisplay(
-        confusion_matrix = confusion_matrix, 
-        display_labels = ["blues", "classical", "country", "disco", "hiphop", "jazz", "metal", "pop", "raggae", "rock"])
-    cm_display.plot()
-    plt.show()
+    #Plot confusion matrix
+    plot_confusion_matrix(y_pred, y_test)
 
-    print(np.sum(y_pred==y_test)/len(y_pred))
+    print(f'Accuracy for CNN model = {np.sum(y_pred==y_test)/len(y_pred)}')
     

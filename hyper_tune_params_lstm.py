@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
-from utils import *
+from utils.helper_functions import *
 import keras_tuner
 
 #Extract features from GTZAN library
