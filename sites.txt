@@ -1,7 +1,0 @@
-#K-NN
-https://www.analyticsvidhya.com/blog/2022/03/music-genre-classification-project-using-machine-learning-techniques/
-https://www.analyticssteps.com/blogs/music-genre-classification-using-machine-learning
-
-#CNN
-https://www.projectpro.io/article/music-genre-classification-project-python-code/566
-https://paperswithcode.com/task/music-genre-classification
