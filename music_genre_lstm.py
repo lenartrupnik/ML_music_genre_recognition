@@ -21,9 +21,9 @@ def create_LSTM_model():
     model.add(tf.keras.layers.Normalization())
     model.add(tf.keras.layers.LSTM(units=130, input_shape=input_shape, return_sequences=True))
     model.add(tf.keras.layers.Dropout(0.15))
-    model.add(tf.keras.layers.LSTM(units=300))
+    model.add(tf.keras.layers.LSTM(units=299))
     model.add(tf.keras.layers.Dropout(0.15))
-    model.add(tf.keras.layers.Dense(units=300, activation='relu'))
+    model.add(tf.keras.layers.Dense(units=299, activation='relu'))
     model.add(tf.keras.layers.Dense(10, activation="softmax"))
     optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
     model.compile(optimizer=optimizer,
